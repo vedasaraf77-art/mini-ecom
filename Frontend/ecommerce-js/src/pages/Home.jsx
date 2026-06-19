@@ -1,8 +1,12 @@
 import React from 'react'
 import Header from '../components/Header'
 import ProductCard from '../components/ProductCard'
+import SearchBar from '../components/SearchBar'
+import Cart from '../pages/Cart'
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = React.useState('')
+  const [cartItems, setCartItems] = React.useState([])
 
       const products = [
     {
@@ -27,16 +31,29 @@ const Home = () => {
         "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf",
     },
   ];
+
+  const filteredProducts = (product)=>{
+    return product.title.toLowerCase().includes(searchTerm.toLowerCase()
+  )}
+
+  const handleAddToCart =(product)=>{
+    setCartItems((prevItems) => [...prevItems, product])
+  }
+
+
    return (
     <>
-      <Header />
+      <Header cartItems={cartItems.length} />
+
+      <Cart cartItems={cartItems} />  
 
       <div className="max-w-7xl mx-auto p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
+              onAddToCart={handleAddToCart}
             />
           ))}
         </div>

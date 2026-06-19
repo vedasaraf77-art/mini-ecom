@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product , onAddToCart}) => {
   return (
     <div className="border rounded-lg shadow-md p-4 hover:shadow-lg transition">
       <img
@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
         ₹{product.price}
       </p>
 
-      <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+      <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" onClick={() => onAddToCart(product)}>
         Add To Cart
       </button>
     </div>
